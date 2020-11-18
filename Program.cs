@@ -80,7 +80,12 @@ namespace sortingByInsert
 
         public static long NextSmaller(long n)
         {
-           int[] array1 = new int[n.ToString().Length];
+          //if (n.ToString()[n.ToString().Length - 1] == 'L')
+            //    n = Convert.ToInt64(n.ToString().Substring(0, n.ToString().Length - 1));
+
+
+            //-
+            int[] array1 = new int[n.ToString().Length];
             for (int i = 0; i <= n.ToString().Length - 1; i++)
                 array1[i] = int.Parse(n.ToString()[i].ToString());
             Array.Sort(array1);
@@ -88,8 +93,13 @@ namespace sortingByInsert
             for (int k = 0; k <= array1.Length - 1; k++)
                 firstString += array1[k];
 
-            for (long n2 = n - 9; n2 != n - 5000; n2--)
+            long index = n;
+            if (n >= 100000)
+                index = 100000;
+            //-
+            for (long n2 = n; n2 >= n - index;)
             {
+                n2--;
                 string secondString = string.Empty;
                 int[] array2 = new int[n2.ToString().Length];
                 for (int l = 0; l <= n2.ToString().Length - 1; l++)
@@ -99,10 +109,10 @@ namespace sortingByInsert
                     secondString += array2[j];
                 if (firstString.Equals(secondString))
                     return n2;
-                else if (n2 == 0 && !firstString.Equals(secondString))
-                    return n;
+                else if (n2 == n - index || n2 == 0)
+                    return -1;
             }
-            return -1;
+            return n;
         }
             
     }

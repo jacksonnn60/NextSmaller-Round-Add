@@ -80,29 +80,27 @@ namespace sortingByInsert
 
         public static long NextSmaller(long n)
         {
-            string act1 = n.ToString();
-            int[] array1 = new int[act1.Length];
-            for (int i = 0; i <= act1.Length - 1; i++)
-                array1[i] = int.Parse(act1[i].ToString());
+           int[] array1 = new int[n.ToString().Length];
+            for (int i = 0; i <= n.ToString().Length - 1; i++)
+                array1[i] = int.Parse(n.ToString()[i].ToString());
             Array.Sort(array1);
-            string firstString = "";
+            string firstString = string.Empty;
             for (int k = 0; k <= array1.Length - 1; k++)
                 firstString += array1[k];
 
-            long n2 = n - 1;
-            while ( n2 != 0)
+            for (long n2 = n - 9; n2 != n - 5000; n2--)
             {
-                string secondString = "";
-                n2--;
-                string act2 = n2.ToString();
-                int[] array2 = new int[act2.Length];
-                for (int l = 0; l <= act2.Length - 1; l++)
-                    array2[l] = int.Parse(act2[l].ToString());
+                string secondString = string.Empty;
+                int[] array2 = new int[n2.ToString().Length];
+                for (int l = 0; l <= n2.ToString().Length - 1; l++)
+                    array2[l] = int.Parse(n2.ToString()[l].ToString());
                 Array.Sort(array2);
                 for (int j = 0; j <= array2.Length - 1; j++)
                     secondString += array2[j];
                 if (firstString.Equals(secondString))
                     return n2;
+                else if (n2 == 0 && !firstString.Equals(secondString))
+                    return n;
             }
             return -1;
         }
